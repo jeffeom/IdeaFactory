@@ -26,7 +26,11 @@ class IdeasController < ApplicationController
 
   def index
     @ideas = Idea.all
-    @user = current_user
+    if session[:user_id]
+      @user ||= current_user
+    else
+      @user = User.new
+    end
   end
 
   def edit
